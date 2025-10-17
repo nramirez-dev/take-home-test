@@ -13,6 +13,11 @@ public class ApiResponse<T>
         Message = message;
     }
 
+
+    public ApiResponse()
+    {
+    }
+
     public ApiResponse(string message)
     {
         Success = false;
