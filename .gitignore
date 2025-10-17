@@ -19,6 +19,8 @@ obj/
 # Rider / VS Code
 .idea/
 .vscode/
+*.sln.DotSettings
+*.sln.DotSettings.user
 
 # Logs and temporary files
 *.log
