@@ -1,23 +1,54 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Fundo.Applications.WebApi.Filters;
+using Fundo.Applications.WebApi.Middleware;
+using Fundo.Infrastructure.Context;
+using Fundo.Infrastructure.Extensions;
+using Fundo.Services.Extensions;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace Fundo.Applications.WebApi
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration) { }
+        private readonly IConfiguration _configuration;
+
+        public Startup(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddInfrastructure(_configuration);
+            services.AddServices();
+            services.AddControllers(options => { options.Filters.Add<ValidationFilter>(); });
+
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Loan Management API",
+                    Version = "v1",
+                });
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Loan Management API v1");
+                c.RoutePrefix = string.Empty;
+            });
             app.UseRouting();
+
             app.UseAuthorization();
             app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
