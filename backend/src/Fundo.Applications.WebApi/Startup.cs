@@ -17,15 +17,18 @@ namespace Fundo.Applications.WebApi
     public class Startup
     {
         private readonly IConfiguration _configuration;
+        private readonly IHostEnvironment _environment;
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostEnvironment environment)
         {
             _configuration = configuration;
+            _environment = environment;
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddInfrastructure(_configuration);
+            services.AddInfrastructure(_configuration, _environment);
+
             services.AddServices();
             services.AddControllers(options => { options.Filters.Add<ValidationFilter>(); });
             services.AddFluentValidationAutoValidation();
