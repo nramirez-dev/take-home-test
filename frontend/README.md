@@ -1,7 +1,7 @@
 
 ---
 
-````markdown
+
 # 🎨 Frontend
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.6.
@@ -40,6 +40,7 @@ Then open the app in your browser:
 👉 [http://localhost:4200](http://localhost:4200)
 
 ---
+
 
 ## 🔗 API Connection
 
