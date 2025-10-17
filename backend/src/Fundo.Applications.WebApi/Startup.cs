@@ -1,10 +1,12 @@
-﻿using Fundo.Applications.WebApi.Filters;
+﻿using FluentValidation.AspNetCore;
+using Fundo.Applications.WebApi.Filters;
 using Fundo.Applications.WebApi.Middleware;
 using Fundo.Infrastructure.Context;
 using Fundo.Infrastructure.Extensions;
 using Fundo.Services.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,6 +28,8 @@ namespace Fundo.Applications.WebApi
             services.AddInfrastructure(_configuration);
             services.AddServices();
             services.AddControllers(options => { options.Filters.Add<ValidationFilter>(); });
+            services.AddFluentValidationAutoValidation();
+            services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; });
 
 
             services.AddSwaggerGen(c =>
