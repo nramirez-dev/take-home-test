@@ -33,6 +33,15 @@ namespace Fundo.Applications.WebApi
             services.AddControllers(options => { options.Filters.Add<ValidationFilter>(); });
             services.AddFluentValidationAutoValidation();
             services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; });
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAngularClient", builder =>
+                {
+                    builder.WithOrigins("http://localhost:4200")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
 
 
             services.AddSwaggerGen(c =>
@@ -55,7 +64,7 @@ namespace Fundo.Applications.WebApi
                 c.RoutePrefix = string.Empty;
             });
             app.UseRouting();
-
+            app.UseCors("AllowAngularClient");
             app.UseAuthorization();
             app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
