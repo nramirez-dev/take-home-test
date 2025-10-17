@@ -252,7 +252,7 @@ GET /loan/0fe664f6-668d-47c6-80d8-6f0cab824455
 
 **Response (200 OK):**
 
-````json
+```json
 {
   "success": true,
   "message": "Payment applied successfully.",
@@ -264,9 +264,7 @@ GET /loan/0fe664f6-668d-47c6-80d8-6f0cab824455
     "status": 0
   }
 }
-
-
-
+```
 
 ---
 
@@ -283,6 +281,8 @@ To run **all tests**, simply execute:
 dotnet test
 
 
+```
+
 ## 🔒 Security & Validation
 
 - **CORS policy:** Configured to allow the Angular frontend (`http://localhost:4200`).
@@ -291,17 +291,6 @@ dotnet test
 - **Exception Handling:** Centralized exception **middleware** provides clear and consistent error responses.
 - **Logging Behavior:** Custom **Logging Behavior** for centralized request/response logging.
 
----
-
-### Notes
-
-- All tests are located in the `src/Fundo.Services.Tests` project.
-- Integration tests use `CustomWebApplicationFactory` to spin up a temporary API instance.
-- You can view detailed test results directly in the terminal or through the VS Code **Test Explorer**.
-
----
-
 ## Notes
 
 Feel free to modify the code as needed, but try to **respect and extend the current architecture**, as this is intended to be a replica of the Fundo codebase.
-````
