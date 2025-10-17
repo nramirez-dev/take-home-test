@@ -26,7 +26,7 @@ public class LoanService : ILoanService
         return MapToDto(loan);
     }
 
-    public async Task<LoanDto> GetLoanByIdAsync(Guid id)
+    public async Task<LoanDto?> GetLoanByIdAsync(Guid id)
     {
         var loan = await _loanRepository.GetByIdAsync(id);
         if (loan == null)

@@ -1,0 +1,32 @@
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: fundo_sql
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_PID=Express
+      - SA_PASSWORD=S3cur3P@ssw0rd!2025
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql
+    restart: always
+
+  api:
+    build:
+      context: .
+      dockerfile: Fundo.Applications.WebApi/Dockerfile
+    container_name: fundo_api
+    depends_on:
+      db:
+        condition: service_started
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=db,1433;Database=LoanDb;User Id=sa;Password=S3cur3P@ssw0rd!2025;TrustServerCertificate=True;MultipleActiveResultSets=True
+      - ASPNETCORE_URLS=http://+:8080
+      - ASPNETCORE_ENVIRONMENT=Production
+    ports:
+      - "8080:8080"
+    restart: always
+
+volumes:
+  mssql_data:
