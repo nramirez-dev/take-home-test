@@ -17,9 +17,6 @@ Make sure you have **Node.js (>=18)** and **Angular CLI** installed globally:
 ```bash
 npm install -g @angular/cli
 ```
-````
-
----
 
 ## 🚀 Running the Frontend
 
