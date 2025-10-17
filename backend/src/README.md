@@ -48,7 +48,7 @@ To run the backend using **Docker Compose**, follow these steps:
 1.  **Navigate to the backend folder:**
 
     ```sh
-    cd take-home-test\backend
+    cd take-home-test\backend\src
     ```
 
 2.  **Build and start the containers:**
@@ -266,25 +266,22 @@ GET /loan/0fe664f6-668d-47c6-80d8-6f0cab824455
 }
 
 
+
+
+---
+
 ## 🧪 Running Tests (Unit + Integration)
 
 This project includes **two types of tests**:
 
-* ✅ **Unit Tests** → validate business logic (e.g., loan creation, payment rules)
-* 🧩 **Integration Tests** → verify API endpoints using an in-memory test server (`WebApplicationFactory`)
+- ✅ **Unit Tests** → validate business logic (e.g., loan creation, payment rules).
+- 🧩 **Integration Tests** → verify API endpoints using an in-memory test server (`WebApplicationFactory`).
 
-To run **tests**, simply execute:
+To run **all tests**, simply execute:
 
 ```bash
 dotnet test
-````
 
-> 💡 The `dotnet test` command automatically discovers and runs every test inside
-> `Fundo.Services.Tests`,
-
-¡Por supuesto! Aquí tienes la sección de **Seguridad y Validación** con la información actualizada, incluyendo el `LoggingBehavior` para manejar logs:
-
----
 
 ## 🔒 Security & Validation
 
@@ -295,8 +292,6 @@ dotnet test
 - **Logging Behavior:** Custom **Logging Behavior** for centralized request/response logging.
 
 ---
-
-Este es un excelente conjunto de prácticas de seguridad y observabilidad. ¡Listo para tu `README.md`!
 
 ### Notes
 
@@ -309,3 +304,4 @@ Este es un excelente conjunto de prácticas de seguridad y observabilidad. ¡Lis
 ## Notes
 
 Feel free to modify the code as needed, but try to **respect and extend the current architecture**, as this is intended to be a replica of the Fundo codebase.
+````
