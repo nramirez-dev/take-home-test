@@ -100,7 +100,11 @@ export class AppComponent implements OnInit {
 
   applyPayment(id: string): void {
     const paymentAmount = Number(prompt('Enter payment amount:'));
-    if (!paymentAmount || paymentAmount <= 0) return;
+
+    if (isNaN(paymentAmount) || paymentAmount <= 0) {
+      alert('Please enter a valid payment amount greater than 0.');
+      return;
+    }
 
     this.http
       .post<{ success: boolean; message: string | null }>(
