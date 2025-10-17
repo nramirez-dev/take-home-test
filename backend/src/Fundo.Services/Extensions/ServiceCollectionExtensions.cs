@@ -12,8 +12,6 @@ public static class ServiceCollectionExtensions
         AddServices(this IServiceCollection services)
     {
         services.AddScoped<ILoanService, LoanService>();
-
-
         services.AddValidatorsFromAssemblyContaining<CreateLoanDtoValidator>();
         services.AddValidatorsFromAssemblyContaining<PaymentDtoValidator>();
 

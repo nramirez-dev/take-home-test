@@ -2,6 +2,7 @@
 using Fundo.Domain.ValueObjects;
 using Fundo.Services.Abstractions;
 using Fundo.Services.DTOs;
+using Fundo.Shared.Exceptions;
 
 namespace Fundo.Services.Services;
 
@@ -25,10 +26,13 @@ public class LoanService : ILoanService
         return MapToDto(loan);
     }
 
-    public async Task<LoanDto?> GetLoanByIdAsync(Guid id)
+    public async Task<LoanDto> GetLoanByIdAsync(Guid id)
     {
         var loan = await _loanRepository.GetByIdAsync(id);
-        return loan == null ? null : MapToDto(loan);
+        if (loan == null)
+            throw new NotFoundException($"Loan with id '{id}' was not found.");
+
+        return MapToDto(loan);
     }
 
     public async Task<IEnumerable<LoanDto>> GetAllLoansAsync()
@@ -41,15 +45,20 @@ public class LoanService : ILoanService
     {
         var loan = await _loanRepository.GetByIdAsync(id);
         if (loan == null)
-            return null;
+            throw new NotFoundException($"Loan with id '{id}' was not found.");
 
         var paymentAmount = new Money(payment.PaymentAmount);
+
+        if (paymentAmount > loan.CurrentBalance)
+            throw new BusinessException("Payment exceeds the current loan balance.");
+
         loan.ApplyPayment(paymentAmount);
 
         await _loanRepository.UpdateAsync(loan);
 
         return MapToDto(loan);
     }
+
 
     private static LoanDto MapToDto(Loan loan)
     {
