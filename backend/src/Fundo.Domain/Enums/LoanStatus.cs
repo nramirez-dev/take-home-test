@@ -1,7 +1,11 @@
-﻿namespace Fundo.Domain.Enums;
+﻿using System.Runtime.Serialization;
 
-public enum LoanStatus
+namespace Fundo.Domain.Enums
 {
-    Active,
-    Paid
+    public enum LoanStatus
+    {
+        [EnumMember(Value = "Active")] Active,
+
+        [EnumMember(Value = "Paid")] Paid
+    }
 }
