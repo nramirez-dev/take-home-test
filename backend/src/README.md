@@ -132,11 +132,6 @@ GET -> https://localhost:5001/loan
 
 ---
 
-Perfecto 🔥 — te dejo una versión mejorada y más profesional de la sección **API Endpoints** para tu README.
-Está estructurada en una tabla Markdown limpia, con ejemplos de request/response bien formateados y consistentes con tu dominio `Loan`.
-
----
-
 ## 📚 API Endpoints
 
 | **Method** | **Endpoint**         | **Description**                |
