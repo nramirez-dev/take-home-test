@@ -172,7 +172,7 @@ Está estructurada en una tabla Markdown limpia, con ejemplos de request/respons
     "amount": 1500.0,
     "currentBalance": 1500.0,
     "applicantName": "Maria Silva",
-    "status": 0
+    "status": "Active"
   }
 }
 ```
@@ -195,14 +195,14 @@ Está estructurada en una tabla Markdown limpia, con ejemplos de request/respons
       "amount": 5000.0,
       "currentBalance": 0.0,
       "applicantName": "Carlos Rivas",
-      "status": 1
+      "status": "Paid"
     },
     {
       "id": "ba522c27-1481-4121-a7ef-384e80e4da2e",
       "amount": 12000.0,
       "currentBalance": 12000.0,
       "applicantName": "Laura Núñez",
-      "status": 0
+      "status": "Active"
     }
   ]
 }
@@ -231,7 +231,7 @@ GET /loan/0fe664f6-668d-47c6-80d8-6f0cab824455
     "amount": 7500,
     "currentBalance": 5000,
     "applicantName": "Pedro Suárez",
-    "status": 0
+    "status": "Active"
   }
 }
 ```
@@ -261,7 +261,7 @@ GET /loan/0fe664f6-668d-47c6-80d8-6f0cab824455
     "amount": 7500.0,
     "currentBalance": 4700.0,
     "applicantName": "Pedro Suárez",
-    "status": 0
+    "status": "Active"
   }
 }
 ```
