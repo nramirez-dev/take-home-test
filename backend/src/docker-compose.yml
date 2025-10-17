@@ -1,6 +1,6 @@
 services:
   db:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    image: mcr.microsoft.com/mssql/server:2019-CU18-ubuntu-20.04
     container_name: fundo_sql
     environment:
       - ACCEPT_EULA=Y
@@ -11,6 +11,23 @@ services:
     volumes:
       - mssql_data:/var/opt/mssql
     restart: always
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "/opt/mssql-tools/bin/sqlcmd",
+          "-S",
+          "localhost",
+          "-U",
+          "sa",
+          "-P",
+          "S3cur3P@ssw0rd!2025",
+          "-Q",
+          "SELECT 1",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
 
   api:
     build:
@@ -19,7 +36,7 @@ services:
     container_name: fundo_api
     depends_on:
       db:
-        condition: service_started
+        condition: service_healthy
     environment:
       - ConnectionStrings__DefaultConnection=Server=db,1433;Database=LoanDb;User Id=sa;Password=S3cur3P@ssw0rd!2025;TrustServerCertificate=True;MultipleActiveResultSets=True
       - ASPNETCORE_URLS=http://+:8080
